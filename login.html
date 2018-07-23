@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录界面</title>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      .login{
+        margin: 0 auto;
+        width: 280px;
+        margin-top:80px ;
+      }
+    </style>
+
+  </head>
+  <body>
+
+
+
+<div class="login">
+<!-- 账号输入不正确警告 -->
+<div class="alert alert-warning alert-dismissible"  id="alert2" role="alert"  style="display: none;position: absolute">
+  <strong>警告!</strong> 请输入3-10位用户名
+</div>
+<!-- 密码输入不正确警告 -->
+<div class="alert alert-warning alert-dismissible"  id="alert3" role="alert"  style="display: none;position: absolute">
+  <strong>警告!</strong> 请输入5-20位密码
+</div>
+
+<div class="alert alert-success" role="alert"  id="alert4" style="display: none;position: absolute">登录成功</div>
+
+<div class="alert alert-warning alert-dismissible"  id="alert10" role="alert"  style="display: none;position: absolute">
+  <strong>警告!</strong> 验证码输入不正确
+</div>
+
+<div class="alert alert-warning alert-dismissible"  id="alert6" role="alert"  style="display: none;position: absolute">
+  <strong>警告!</strong> 登录失败，请检查用户名密码是否正确
+</div>
+
+<div class="alert alert-success alert-dismissible"  id="alert7" role="alert"  style="display: none;position: absolute;">
+  <strong></strong>你以登录，无需重复登录
+</div>
+
+ <p>登录界面</p>
+<!--     <form role="form"> -->
+      <div class="form-group  ">
+        <label>用户名</label>
+        <input type="text" class="form-control "  placeholder="请输入您的用户名..."  id="lname"></div>
+      <div class="form-group">
+        <label>密码</label>
+        <input type="password" class="form-control" placeholder="请输入您的用户密码..." id="lpasswd"></div>
+      <div class="checkbox">
+        <label>
+      </div>
+        <div class="form-group">
+        <label>验证码</label>
+        <input type="text" class="form-control"  placeholder="请输入验证码..."  id="code"  name="code">
+        <img src="php/code.php"   onclick="this.src='php/code.php?'+Math.random();"alt="">
+      </div>
+      <button  class="btn btn-default"  id="sub">登录</button>
+    <!-- </form> -->
+</div>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="js/jquery.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+  $(function(){
+
+  if($.cookie('loginVal') =="success"){
+    $('#alert7').css("marginTop","-60px").show().delay(4000).hide(0);
+     setTimeout(function(){$(".right").load("table.html");},1000);
+         //登录注册所在自动隐藏
+    $('#form0').hide();
+
+    //空form显示，为后面加节点做准备
+    $('#form1').show();
+    //创建p1节点
+    var word =$('<p  style="color: white;float:left;line-height:24px;"  id="p1">欢迎你，</p>');
+    //创建p1节点加在了form后面
+    word.appendTo('#form1');
+
+    //创建p2节点
+    var w = $('<p  style="color: white;float:left;line-height:24px;" id="p2"></p>');
+    var name =  $.cookie("name");
+
+    //创建p2节点加在了form后面
+    w.appendTo('#form1');
+
+     $('#p2').html(name);
+
+
+    //显现左侧菜单
+     $('.list').show();
+
+  }else{
+    
+  }
+
+
+
+//点击表单下登录引发函数
+$('#sub').click(function(){
+
+  //获得用户名
+  lname1 = $('#lname').val();
+
+//获取用户名长度
+var lenn = $('#lname').val().length;
+
+//判断用户名是否合格
+if(lenn== ""  ||  lenn <=2 || lenn >20 ){
+  //输出不符合提示
+  $('#alert2').css("marginTop","-60px").show().delay(3000).hide(0);
+  return false;
+}
+
+
+//获取密码长度
+var passwd = $('#lpasswd').val();
+ var  lenp = passwd.length;
+//验证密码是否符合
+if(lenp== ""  ||  lenp < 5 || lenp >20 ){
+  //输出不符合提示
+  $('#alert3').css("marginTop","-60px").show().delay(3000).hide(0);
+  return false;
+}
+
+var code = $("input[name='code']").val();
+
+$.get({
+  url:"php/admin.php?action=getCode",
+  async:false,
+  success:function(res){
+   code2 = res.trim();
+  }
+});
+
+ $("input[name='code']").val(code2);
+
+if(code2 ==code || code !=""){
+
+
+
+$.post({
+  url:"php/admin.php?action=login",
+  async:false,
+  data:{
+    name :lname1,
+    passwd : passwd,
+  },
+  success:function(res){
+    req = res.trim();
+  }
+
+})
+    if(req=="ok"){
+      //设置登录成功cookie
+      $.cookie('loginVal', 'success',{path: '/'}); 
+       $.cookie('name', lname1,{path: '/'}); 
+     loginSucc();
+    }else{
+     $('#alert6').css("marginTop","-60px").show().delay(3000).hide(0);  
+    }
+}else{
+$('#alert10').css("marginTop","-60px").show().delay(3000).hide(0);
+
+}
+
+
+
+
+
+})
+
+function  loginSucc(){
+  // 登录成功提示
+$('#alert4').css("marginTop","-60px").show().delay(3000).hide(0);
+
+//登录注册所在自动隐藏
+$('#form0').hide();
+
+//空form显示，为后面加节点做准备
+$('#form1').show();
+//创建p1节点
+var word =$('<p  style="color: white;float:left;line-height:24px;"  id="p1">欢迎你，</p>');
+//创建p1节点加在了form后面
+word.appendTo('#form1');
+
+//创建p2节点
+var w = $('<p  style="color: white;float:left;line-height:24px;" id="p2"></p>');
+
+//创建p2节点加在了form后面
+w.appendTo('#form1');
+
+//加入的第二个p里面加入用户名
+ $('#p2').html(lname1);
+
+
+//显现左侧菜单
+ $('.list').show();
+
+ //右侧加载表格,计时函数延迟加载
+ setTimeout(function(){$(".right").load("table.html");},1000);
+
+
+}
+
+
+  })
+</script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
