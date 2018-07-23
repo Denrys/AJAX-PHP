@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>表格二级页</title>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    *{margin: 0 ;padding: 0}
+    body{width: 100%;height: 100%;}
+
+
+    .table{  font-weight: bold;text-align: center;margin:0 auto;}
+    tr:hover{background: #f0f6fa};
+
+
+
+    </style>
+
+
+</head>
+
+<body>
+
+<!-- 跳出的模态框 -->
+<div class="modal  fade" id="about">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+
+
+  <!-- 隐藏式表单内容 -->
+  <form class="form-horizontal" role="form">
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">姓名</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" placeholder="请输入用户姓名"  name="name"></div>
+          </div>
+
+          <div class="form-group">
+            <label " class="col-sm-2 control-label">电话</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  placeholder="请输入用户电话" name="phone"></div>
+          </div>
+
+              <div class="form-group">
+            <label class="col-sm-2 control-label">地址</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="请输入用户地址" name="addr"></div>
+          </div>
+              <div class="form-group">
+            <label class="col-sm-2 control-label">职务</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="请输入用户职务" name="job"></div>
+          </div>
+  </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary"  id="butt"  data-dismiss="modal">保存</button> 
+        <button type="button" class="btn btn-primary"  id="butt0"  data-dismiss="modal"  style="display: none;">更新</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+<!-- 删除错误提示框 -->
+<div class="alert alert-warning alert-dismissible"  id="alert0" role="alert"  style="display: none;position: absolute;">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>警告!</strong> 请选择数据在进行删除操作
+</div>
+
+<!-- 修改错误提示框 -->
+<div class="alert alert-warning alert-dismissible"  id="alert5" role="alert"  style="display: none;position: absolute;">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>警告!</strong> 修改失败
+</div>
+
+<!-- 取消选择提示框 -->
+<div class="alert alert-success alert-dismissible"  id="alert11" role="alert"  style="display: none;position: absolute;">
+
+  <strong></strong> 取消选择成功
+</div>
+
+<!-- 未选择提示框 -->
+<div class="alert alert-danger  alert-dismissible"  id="alert12" role="alert"  style="display: none;position: absolute;">
+
+  <strong></strong> 你未选择任何东西
+</div>
+
+
+
+<div class="alert alert-success alert-dismissible"  id="alert13" role="alert"  style="display: none;position: absolute;">
+  <strong></strong>新增失败
+</div>
+
+<div class="alert alert-success alert-dismissible"  id="alert14" role="alert"  style="display: none;position: absolute;">
+  <strong></strong>删除成功
+</div>
+
+<div class="alert alert-success alert-dismissible"  id="alert15" role="alert"  style="display: none;position: absolute;">
+  <strong></strong>新增成功
+</div>
+<div class="alert alert-success alert-dismissible"  id="alert6" role="alert"  style="display: none;position: absolute;">
+  <strong></strong>修改成功
+</div>
+<div class="alert alert-success alert-dismissible"  id="alert7" role="alert"  style="display: none;position: absolute;">
+  <strong></strong>登录成功
+</div>
+
+<div id="main">
+
+
+  <table  class="table    table-responsive table-bordered">
+    <tr  class="tr1"  >
+      <td>id</td>
+      <td>名称</td>
+      <td>电话</td>
+      <td>地址</td>
+      <td>职务</td>
+      <td>创建时间</td>
+      <td>创建ip</td>
+      <td>操作</td>
+    </tr>
+
+
+  </table>
+</div>
+<script  src='js/jquery.js'></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/table.js"></script>
+<script src="js/bootstrap.min.js"></script>
+ 
+</body>
+</html>
