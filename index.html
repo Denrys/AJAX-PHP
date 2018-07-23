@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <style>
+/* 下面是左侧导航栏的代码 */
+    .left  {position: fixed;top: 51px;bottom: 0;left: 0;z-index: 1000;display: block;padding: 20px;overflow-x:hidden;overflow-y: auto;background-color: #ddd;border-right: 1px solid #eee;}
+      /*导航栏嵌套样式*/
+        .nav-sidebarl {margin-right: -21px; margin-bottom: 20px;margin-left: -20px; }
+
+        .nav-sidebarl > li > a {padding-right: 20px;padding-left: 20px; background: #428bca;color: black;}
+
+        .nav > li > a:hover, .nav > li > a:focus{
+          background: #f0f6fa;}
+        .nav-sidebar > .active > a,
+        .nav-sidebar > .active > a:hover,
+        .nav-sidebar > .active > a:focus {color: #fff;background-color: #428bca; }
+
+        .main {padding: 20px;}
+        
+        /*页面右半部分*/
+        .right{top:51px;padding-top: 70px; }
+
+      .color{color: #fff;background: blue;}
+ </style>
+
+  </head>
+  <body>
+<div class="container">
+
+<!-- 导航栏 -->
+  <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+          <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                              data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">某管理系统</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                  <li  class="active"><a href="">首页</a></li>
+                  <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                      <li class="dropdown-header">业务功能</li>
+                      <li><a href="#">用户建立</a></li>
+                      <li><a href="#">用户修改</a></li>
+                      <li><a href="#">用户删除</a></li>
+                      <li class="divider"></li>
+                      <li class="dropdown-header">系统功能</li>
+                  </ul>
+                  </li>
+                  <li><a href="#">帮助</a></li>
+              </ul>
+              <form class="navbar-form navbar-right" role="search"  id="form1" style="width: 230px;">
+
+              </form>
+              <div class="navbar-form navbar-right" role="search"  id="form0">
+                    <button type="submit" class="btn btn-default"  id="login">登录</button>
+                    <button type="submit" class="btn btn-default"  id="register">注册</button>
+              </div>
+          </div>
+      </div>
+</nav>
+
+      <div class="row">
+      <!-- 左侧菜单 -->
+          <div class="col-sm-3 col-md-2   col-xs-3 left  ">
+              <ul class="nav nav-sidebarl">
+                <li   class="active"><a href="#">首页</a></li>
+              </ul>
+              <ul class="nav nav-sidebarl  list">
+                  <li  data-toggle="modal" data-target="#about"   class="add"><a href="#">用户新增</a></li>
+              </ul>
+          </div>
+
+          <!-- 右侧菜单 -->
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2   col-xs-9  col-xs-offset-3  main right">
+          </div> 
+
+      </div><!--row  end-->
+</div><!--container  end-->
+
+
+<script src="js/jquery.js"></script>
+ <script>
+ $(function(){ 
+
+  // //点击登录加载登录页面
+  $('#login').click(function(){
+    $(".right").load("login.html");
+  })
+
+
+  //点击注册加载登录页面
+  $('#register').click(function(){
+    $(".right").load("register.html");
+  })
+
+$('#form1').hide();
+
+//开局自动加载登录
+ $(".right").load("table.html");
+//隐藏左侧菜单
+  $('.list').hide();
+ 
+
+
+  })
+ </script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
